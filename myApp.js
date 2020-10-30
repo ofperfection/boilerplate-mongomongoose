@@ -14,6 +14,7 @@
 //
 // mongoose.connect(<Your URI>, { useNewUrlParser: true, useUnifiedTopology: true }); 
 const mongoose = require('mongoose')
+const { Schema } = mongoose;
 mongoose.connect(process.env.MONGO_URI, {seNewUrlParser: true, useUnifiedTopology: true});
 
 /** # SCHEMAS and MODELS #
@@ -40,8 +41,13 @@ mongoose.connect(process.env.MONGO_URI, {seNewUrlParser: true, useUnifiedTopolog
 // `default` values. See the [mongoose docs](http://mongoosejs.com/docs/guide.html).
 
 // <Your code here >
-
-var Person /* = <Your Model> */
+var personSchema = new Schema({
+  name : {type: String, required: true},
+  age : Number,
+  favoriteFoods : [String]
+});
+var Person = mongoose.model('Person', personSchema);
+/* = <Your Model> */
 
 // **Note**: Glitch is a real server, and in real servers interactions with
 // the db are placed in handler functions, to be called when some event happens
